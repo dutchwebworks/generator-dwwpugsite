@@ -21,10 +21,9 @@ module.exports = generators.Base.extend({
 		// Copy over files and directories
 		// ---------------------------
 
-		this.fs.copy(sourceRoot + '/app', destRoot + '/app');
+		this.fs.copy(sourceRoot + '/src', destRoot + '/src');
 		this.fs.copy(sourceRoot + '/.gitignore', destRoot + '/.gitignore');
-		this.fs.copy(sourceRoot + '/package.json', destRoot + '/package.json');
-		this.fs.copy(sourceRoot + '/README.md', destRoot + '/README.md');
+		this.fs.copy(sourceRoot + '/Gruntfile.js', destRoot + '/Gruntfile.js');
 
 		// ---------------------------
 		// Copy over (template) files
@@ -32,6 +31,8 @@ module.exports = generators.Base.extend({
 
 		this.fs.copyTpl(sourceRoot + '/package.json', destRoot + '/package.json', templateContext);
 		this.fs.copyTpl(sourceRoot + '/README.md', destRoot + '/README.md', templateContext);
+		this.fs.copyTpl(sourceRoot + '/src/index.pug', destRoot + '/src/index.pug', templateContext);
+		this.fs.copyTpl(sourceRoot + '/src/includes/config.pug', destRoot + '/src/includes/config.pug', templateContext);
 	},
 	_getPrompt: function() {
 		var prompts = [
@@ -55,7 +56,7 @@ module.exports = generators.Base.extend({
 				{
 					name: 'version',
 					message: 'What is the version of your app?',
-					default: '0.1.0'
+					default: '1.0.0'
 				}
 			];
 
@@ -70,8 +71,8 @@ module.exports = generators.Base.extend({
 		callback();
 	},
 	initializing: function() {
-		var message = chalk.yellow.bold('FIRST TEXT LINE') + chalk.yellow('SECOND TEXT LINE');
-		this.log(yosay(message, { maxLength: 16 }));
+		var message = chalk.yellow.bold('Welcome to the Dutchwebworks ') + chalk.yellow('Pugsite generator');
+		this.log(yosay(message, { maxLength: 15 }));
 	},
 	promting: function() {
 		var done = this.async();
@@ -87,11 +88,11 @@ module.exports = generators.Base.extend({
 		this._createProjectFileSystem();
 	},
 	install: function() {
-		var message = chalk.yellow.bold('FIRST TEXT LINE');
-		this.log(yosay(message, { maxLength: 22 }));
+		var message = chalk.yellow.bold('Running NPM install, hold on ...');
+		this.log(yosay(message, { maxLength: 20 }));
+		this.npmInstall();
 	},
 	end: function() {
-		// this.spawnCommand('npm', ['install']);
-		// this.spawnCommand('gulp', ['serve', 'a-third-argument']);
+		this.spawnCommand('grunt', ['serve']);
 	}
 });

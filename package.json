@@ -1,16 +1,16 @@
 {
-  "name": "generator-pugsite",
+  "name": "generator-dwwpugsite",
   "version": "1.0.0",
   "description": "Simple web site using Pug templates and Grunt",
   "main": "app/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dutchwebworks/generator-pugsite.git"
+    "url": "https://github.com/dutchwebworks/generator-dwwpugsite.git"
   },
   "bugs": {
-    "url": "https://github.com/dutchwebworks/generator-pugsite/issues"
+    "url": "https://github.com/dutchwebworks/generator-dwwpugsite/issues"
   },
-  "homepage": "https://github.com/dutchwebworks/generator-pugsite",
+  "homepage": "https://github.com/dutchwebworks/generator-dwwpugsite",
   "files": [
     "app"
   ],
