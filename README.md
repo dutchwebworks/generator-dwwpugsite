@@ -1,4 +1,4 @@
-## pugsite Yeoman generator
+## Pugsite Yeoman generator
 
 Simple web site using Pug templates and Grunt
 
