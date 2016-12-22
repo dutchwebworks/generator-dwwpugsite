@@ -1,6 +1,6 @@
 ## Pugsite Yeoman generator
 
-Simple web site using Pug templates and Grunt
+Generating a simple starting web site using the Pug templating system, Sass to Css compilation and Grunt to watch for file changes, compilation and serving the statically generated HTML (Pug) web site.
 
 *By Dennis Burger, december 2016*
 
@@ -8,7 +8,7 @@ Simple web site using Pug templates and Grunt
 
 Make sure NodeJS is installed by going to the [NodeJS website](https://nodejs.org/en/), download and install it for your operating system. This will also make the `npm` command-line tool available.
 
-Open a **command-line window** (Terminal or MS-DOS) and type the following to globally (`-g`) install the above required NPM components all in one go:
+Open a **command-line window** (Terminal or MS-DOS prompt) and type the following to globally (`-g`) install the above required NPM components all in one go:
 
 	npm install -g yo
 
@@ -43,8 +43,32 @@ Finally a web browser will open with `http://localhost:3000`. In the background 
 
 When any of these change Grunt will compile / copy over those changes from the `src/` to the `dist/` directory and refresh the web browser.
 
-## Unlinking this Yeoman generator
+## Stopping and continuing working on this web site
 
-To unlink this Yeoman generator, type:
+When your working with this setup, Grunt is running as described above etc., and want to quit your local development, do the following.
+
+### Stop Grunt watching
+
+In the still running **command-line window** (Terminal or MS-DOS prompt) hit `ctrl + c` and type `y`. This will stop Grunt from watching, compiling and serving the `dist/` directory to `http://localhost:3000` in the web browser. The web site no longer works in your web browser.
+
+### Start Grunt watching and serving the web site again
+
+To continue working on your site open a **command-line window** (Terminal or MS-DOS prompt) and make sure you `cd` into the directory where the `Gruntfile.js` resides and type:
+
+	grunt serve
+
+## Yeoman generator
+
+### Updating
+
+If this Yeoman generator is updated you can update your globally installed version with the newer version by just reinstalling it again.
+
+	npm install -g generator-dwwpugsite
+
+### Removing
+
+Optionally: If you want to remove this globally installed Yeoman generator you need to **unlink** it. Open a **command-line window** (Terminal or MS-DOS prompt) and type:
 
 	npm uninstall -g generator-dwwpugsite
+
+Now you can't use `yo dwwpugsite` anymore to generate a **new web site** using this Yeoman generator.
