@@ -122,7 +122,7 @@ gulp.task('build', ['clean'], function(){
 	gulp.start('copy');
 });
 
-gulp.task('serve', ['browser-sync'], function(){
+gulp.task('serve', ['build', 'browser-sync'], function(){
 	gulp.watch(dist + '/*.html').on('change', browserSync.reload);
 	gulp.watch(config.cssPath + '/*.css').on('change', browserSync.reload);
 	gulp.watch(src + '/*.pug', ['pug']).on('change', browserSync.reload);
