@@ -4,20 +4,20 @@
 
 Source files are compiled (and copied) from the `src/` directory to the `dist/`. The `dist/` directory is empty by default and removed everytime Grunt launches to re-create / re-compile the source material to the destination directory.
 
-## Grunt
+## Grunt or Gulp
 
-Grunt will watch for file changes to the following files:
+Grunt or Gulp will watch for file changes to the following files:
 
 * *.pug
 * *.scss
 * *.js
 * *.img
 
-When any of these change Grunt will compile / copy over those changes from the `src/` to the `dist/` directory and refresh the web browser.
+When any of these change Grunt or Gulp will compile / copy over those changes from the `src/` to the `dist/` directory and refresh the web browser.
 
 ## Pug
 
-In the `src/` are Pug `*.pug` files. These are the source HTML files and watched by Grunt to compile to the `dist/*.html` directory.
+In the `src/` are Pug `*.pug` files. These are the source HTML files and watched by Grunt or Gulp to compile to the `dist/*.html` directory.
 
 ### Extends
 
