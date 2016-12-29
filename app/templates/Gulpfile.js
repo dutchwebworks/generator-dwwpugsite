@@ -65,7 +65,8 @@ gulp.task('sass', function(){
 			sourcemap: false,
 			errLogToConsole: true
 		}))
-		.pipe(gulp.dest(config.cssPath));
+		.pipe(gulp.dest(config.cssPath))
+		.pipe(browserSync.stream());
 });
 
 /* Compile Pug templates
@@ -112,10 +113,10 @@ gulp.task('build', ['clean'], function(){
 });
 
 gulp.task('serve', ['browser-sync'], function(){
-	gulp.watch(dist + '/*.html', [browserSync.reload]);
-	gulp.watch(config.cssPath + '/*.css', [browserSync.reload]);
-	gulp.watch(src + '/*.pug', ['pug', browserSync.reload]);
-	gulp.watch(config.scssPath + '/**/*.scss', ['sass', browserSync.reload]);
+	gulp.watch(dist + '/*.html').on('change', browserSync.reload);
+	gulp.watch(config.cssPath + '/*.css').on('change', browserSync.reload);
+	gulp.watch(src + '/*.pug', ['pug']).on('change', browserSync.reload);
+	gulp.watch(config.scssPath + '/**/*.scss', ['sass']).on('change', browserSync.reload);
 });
 
 // gulp.task('default', ['build']);
