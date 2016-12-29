@@ -1,7 +1,7 @@
 {
   "name": "generator-dwwpugsite",
-  "version": "2.0.0",
-  "description": "Simple web site using Pug templates and Grunt",
+  "version": "2.0.1",
+  "description": "A Yeoman generator for a simple web site starter kit using Grunt or Gulp with the Pug templating system and Sass to CSS compilation",
   "main": "app/index.js",
   "repository": {
     "type": "git",
