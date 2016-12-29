@@ -1,6 +1,6 @@
 ## Pugsite Yeoman generator
 
-Generating a simple starting web site using the Pug templating system, Sass to Css compilation and Grunt to watch for file changes, compilation and serving the statically generated HTML (Pug) web site.
+Generating a simple starting web site using the Pug templating system, Sass to Css compilation and Grunt or Gulp to watch for file changes, compilation and serving the statically generated HTML (Pug) web site.
 
 *By Dennis Burger, december 2016*
 
@@ -32,30 +32,34 @@ Create and `cd` to a new (empty) project directory where we'll use this generato
 
 ### Yeoman questions
 
-You will be greated by Yeoman and it will ask you some basic questions regarding this project. This **meta-data information** is used inside some of the Yeoman generated files.
+You will be greated by Yeoman and he will ask you some basic questions regarding your new project. This **meta-data information** is used inside some of the Yeoman generated files. The last question will be what buildtool you would like to use: **Grunt** or **Gulp**.
 
-Finally a web browser will open with `http://localhost:3000`. In the background Grunt is watching for changes to the following files:
+Finally a web browser will open with `http://localhost:3000`. In the background Grunt or Gulp is watching for changes to the following files:
 
 * *.pug
 * *.scss
 * *.js
 * *.img
 
-When any of these change Grunt will compile / copy over those changes from the `src/` to the `dist/` directory and refresh the web browser.
+When any of these change Grunt or Gulp will compile / copy over those changes from the `src/` to the `dist/` directory and refresh the web browser.
 
 ## Stopping and continuing working on this web site
 
-When your working with this setup, Grunt is running as described above etc., and want to quit your local development, do the following.
+When your working with this setup, Grunt or Gulp is running as described above etc., and want to quit your local development, do the following.
 
-### Stop Grunt watching
+### Stop Grunt or Gulp from watching
 
-In the still running **command-line window** (Terminal or MS-DOS prompt) hit `ctrl + c` and type `y`. This will stop Grunt from watching, compiling and serving the `dist/` directory to `http://localhost:3000` in the web browser. The web site no longer works in your web browser.
+In the still running **command-line window** (Terminal or MS-DOS prompt) hit `ctrl + c` and type `y`. This will stop Grunt or Gulp from watching, compiling and serving the `dist/` directory to `http://localhost:3000` in the web browser. The web site no longer works in your web browser.
 
-### Start Grunt watching and serving the web site again
+### Start Grunt or Gulp watching and serving the web site again
 
-To continue working on your site open a **command-line window** (Terminal or MS-DOS prompt) and make sure you `cd` into the directory where the `Gruntfile.js` resides and type:
+To continue working on your site open a **command-line window** (Terminal or MS-DOS prompt) and make sure you `cd` into the directory where the `Gruntfile.js` or the `Gulpfile.js` resides and type:
 
 	grunt serve
+
+Or when using Gulp:
+
+	gulp serve
 
 ## Yeoman generator
 
