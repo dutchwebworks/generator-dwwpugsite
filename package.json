@@ -1,6 +1,6 @@
 {
   "name": "generator-dwwpugsite",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Simple web site using Pug templates and Grunt",
   "main": "app/index.js",
   "repository": {
