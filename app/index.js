@@ -10,6 +10,7 @@ module.exports = generators.Base.extend({
 		var destRoot = this.destinationRoot(),
 			sourceRoot = this.sourceRoot(),
 			templateContext = {
+				buildtool: this.buildtool,
 				appname: this.appname,
 				appdescription: this.appdescription,
 				appauthor: this.appauthor,
@@ -23,13 +24,19 @@ module.exports = generators.Base.extend({
 
 		this.fs.copy(sourceRoot + '/src', destRoot + '/src');
 		this.fs.copy(sourceRoot + '/.gitignore', destRoot + '/.gitignore');
-		this.fs.copy(sourceRoot + '/Gruntfile.js', destRoot + '/Gruntfile.js');
+
+		if(this.buildtool == 'Grunt') {
+			this.fs.copy(sourceRoot + '/Gruntfile.js', destRoot + '/Gruntfile.js');
+			this.fs.copyTpl(sourceRoot + '/package-grunt.json', destRoot + '/package.json', templateContext);
+		} else {
+			this.fs.copy(sourceRoot + '/Gulpfile.js', destRoot + '/Gulpfile.js');
+			this.fs.copyTpl(sourceRoot + '/package-gulp.json', destRoot + '/package.json', templateContext);
+		}
 
 		// ---------------------------
 		// Copy over (template) files
 		// ---------------------------
 
-		this.fs.copyTpl(sourceRoot + '/package.json', destRoot + '/package.json', templateContext);
 		this.fs.copyTpl(sourceRoot + '/README.md', destRoot + '/README.md', templateContext);
 		this.fs.copyTpl(sourceRoot + '/src/index.pug', destRoot + '/src/index.pug', templateContext);
 		this.fs.copyTpl(sourceRoot + '/src/includes/config.pug', destRoot + '/src/includes/config.pug', templateContext);
@@ -37,32 +44,45 @@ module.exports = generators.Base.extend({
 	_getPrompt: function() {
 		var prompts = [
 				{
+					type: 'input',
 					name: 'name',
 					message: 'What is the name of this project?',
 					default: this.appname
 				},
 				{
+					type: 'input',
 					name: 'description',
 					message: 'What is the project description?',
 				},
 				{
+					type: 'input',
 					name: 'yourname',
 					message: 'What is your name?',
 				},
 				{
+					type: 'input',
 					name: 'youremail',
 					message: 'What is your e-mail address?',
 				},
 				{
+					type: 'input',
 					name: 'version',
 					message: 'What is the version of your app?',
 					default: '1.0.0'
+				},
+				{
+					type: 'list',
+					name: 'buildtool',
+					message: 'Which buildtool would you like to use?',
+					choices: ['Grunt', 'Gulp'],
+					default: 0
 				}
 			];
 
 			return prompts;
 	},
 	_saveAnswers: function(answers, callback) {
+		this.buildtool = answers.buildtool;
 		this.appname = answers.name;
 		this.appdescription = answers.description;
 		this.appauthor = answers.yourname;
@@ -77,7 +97,7 @@ module.exports = generators.Base.extend({
 	promting: function() {
 		var done = this.async();
 
-		this.prompt(this._getPrompt(), function(answers){			
+		this.prompt(this._getPrompt(), function(answers){	
 			this._saveAnswers(answers, done);
 		}.bind(this));
 	},
@@ -93,6 +113,10 @@ module.exports = generators.Base.extend({
 		this.npmInstall();
 	},
 	end: function() {
-		this.spawnCommand('grunt', ['serve']);
+		if(this.buildtool == 'Grunt') {	
+			this.spawnCommand('grunt', ['serve']);
+		} else {
+			this.spawnCommand('gulp', ['serve']);
+		}
 	}
 });
