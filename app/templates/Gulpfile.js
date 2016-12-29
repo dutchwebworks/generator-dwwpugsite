@@ -10,7 +10,9 @@ var gulp = require('gulp'),
 	browserSync = require('browser-sync').create(),
 	$ = require('gulp-load-plugins')(),
 	pug = require('gulp-pug'),
-	gulp_watch_pug = require('gulp-watch-pug')
+	gulp_watch_pug = require('gulp-watch-pug'),
+	clean = require('gulp-contrib-clean'),
+	copy = require('gulp-contrib-copy'),
 	pkg = require('./package.json'),
 	reload = browserSync.reload,
 	src = './src'
@@ -95,11 +97,19 @@ gulp.task('browser-sync', function() {
 -------------------------------------------------------------------- */
 
 gulp.task('clean', function(){
+	gulp.src([dist], {read: false}).pipe(clean());
+});
+
+/* Copy
+-------------------------------------------------------------------- */
+
+gulp.task('copy', function(){
 	gulp.src([
-		config.cssPath + '/**/*.map',
-		config.jsPathDest + '/**/*.map'
-		],{read: false})
-	.pipe($.clean());
+		config.jsPathSrc + '**/*.js',
+		config.imgPathSrc + '**/.{gif|jpg|png}'
+	])
+	.pipe(copy())
+	.pipe(gulp.dest(dist));
 });
 
 /**********************************************************************
@@ -119,4 +129,4 @@ gulp.task('serve', ['browser-sync'], function(){
 	gulp.watch(config.scssPath + '/**/*.scss', ['sass']).on('change', browserSync.reload);
 });
 
-// gulp.task('default', ['build']);
+gulp.task('default', ['build']);
