@@ -23,7 +23,7 @@ module.exports = generators.Base.extend({
 		// ---------------------------
 
 		this.fs.copy(sourceRoot + '/src', destRoot + '/src');
-		this.fs.copy(sourceRoot + '/.gitignore', destRoot + '/.gitignore');
+		this.fs.copy(sourceRoot + '/_gitignore', destRoot + '/.gitignore');
 
 		if(this.buildtool == 'Grunt') {
 			this.fs.copy(sourceRoot + '/Gruntfile.js', destRoot + '/Gruntfile.js');
