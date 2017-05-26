@@ -2,7 +2,7 @@
 
 Generating a simple starting web site using the Pug templating system, Sass to Css compilation and Grunt or Gulp to watch for file changes, compilation and serving the statically generated HTML (Pug) web site.
 
-*By Dennis Burger, december 2016*
+*By Dennis Burger, may 2017*
 
 ## One time installation
 
