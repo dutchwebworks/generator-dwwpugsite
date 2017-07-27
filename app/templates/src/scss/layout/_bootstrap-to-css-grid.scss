@@ -1,0 +1,92 @@
+// Converting Bootstrap grid to proper W3C CSS Grid layout
+
+// ---------------------------------------------
+// Feature query the web browser for support of the
+// current W3C CSS Grid support (not old 2013 syntax)
+// which doesn't support the auto-placement algorithm
+// that we need when using dynamically created columns
+// ---------------------------------------------
+
+@supports (grid-area: auto) {
+	// ---------------------------------------------
+	// Containers
+	// ---------------------------------------------
+
+	.container {
+		// Remove the now unneeded Bootstrap aligment padding
+		padding-left: 0;
+		padding-right: 0;
+
+		// Remove the :before and :after otherwise
+		// these become CSS Grid Elements as well
+		&,	
+		.row {
+			&:before,
+			&:after {
+				display: none;
+			}
+		}
+
+		// Convert to CSS Grid
+		> .row {			
+			// Convert Bootstrap rows into 1-dimensional CSS Grid containers
+			display: grid;
+			grid-template-columns: repeat(12, 1fr);
+
+			// Remove the now unneeded Bootstrap negative aligment margins
+			margin-left: 0;
+			margin-right: 0;
+		}	
+	}
+
+	// ---------------------------------------------
+	// Rows
+	// ---------------------------------------------
+
+	.row {
+		// Remove the Bootstrap width on columns in favour 
+		// of width set by the CSS Grid parent element
+		> [class^="col-"] {
+			width: auto;
+			max-width: none;
+		}
+
+		// ---------------------------------------------
+		// Column breakpoints
+		// ---------------------------------------------
+
+		// Extra small
+		@for $xs from 1 through 12 {
+			> .col-xs-#{$xs} {
+				grid-column: span $xs;
+			}
+		}
+
+		// Small
+		@media (min-width: map-get($breakpoints, 'sm')) {
+			@for $sm from 1 through 12 {
+				> .col-sm-#{$sm} {
+					grid-column: span $sm;
+				}
+			}
+		}
+
+		// Medium
+		@media (min-width: map-get($breakpoints, 'md')) {
+			@for $md from 1 through 12 {
+				> .col-md-#{$md} {
+					grid-column: span $md;
+				}
+			}
+		}
+
+		// Large
+		@media (min-width: map-get($breakpoints, 'lg')) {
+			@for $lg from 1 through 12 {
+				> .col-lg-#{$lg} { 
+					grid-column: span $lg;
+				}
+			}
+		}
+	}
+}

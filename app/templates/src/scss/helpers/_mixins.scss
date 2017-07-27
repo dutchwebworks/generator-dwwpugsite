@@ -1,0 +1,77 @@
+// ---------------------------------------------
+// Media Queries
+// ---------------------------------------------
+
+@mixin respond-to-max($value) {
+	@media(max-width: map-get($breakpoints, $value)-1) {
+		@content;
+	}
+}
+
+@mixin respond-to-min($value) {
+	@media(min-width: map-get($breakpoints, $value)) {
+		@content;
+	}
+}
+
+// ---------------------------------------------
+// @font-face
+// var $dir-font is listed in _config.scss
+// Don't forget to add the proper mime-types 
+// for these font files in the web server config
+//
+// Usage, @root: @include font-face('Proxima Nova', 'proxima-nova-std-0384586', 400, 'normal');
+// ---------------------------------------------
+
+@mixin font-face($font-name, $font-file, $font-weight: 400, $font-style: 'normal') {
+	@font-face {
+		font-family: '#{$font-name}';
+		src: url('#{$dir-font}/#{$font-file}.eot');
+		src: url('#{$dir-font}/#{$font-file}.eot?#iefix') format('embedded-opentype'),
+			 url('#{$dir-font}/#{$font-file}.woff') format('woff'),
+			 url('#{$dir-font}/#{$font-file}.ttf') format('truetype'),
+			 url('#{$dir-font}/#{$font-file}.svg##{$font-file}') format('svg');
+		font-weight: $font-weight;
+		font-style: $font-style;
+	}
+}
+
+// ---------------------------------------------
+// Using a CSS3 MediaQuery for background images on 
+// ---------------------------------------------
+
+@mixin background-adaptive($file-name, $background-size: 100% 100%, $file-extension: 'png') {
+	background-size: $background-size;
+	background-image: url($file-name + '.svg');
+
+	// Modernizr feature query: If browsers doesn't support SVG
+	// this `no-svg` class with be put on the HTML-tag
+	// Can be used as a fallback option
+	.no-svg & {
+		background-image: url($file-name + '.' + $file-extension);
+	}
+}
+
+// ---------------------------------------------
+// Style elements depending of the number of 
+// elements within a parent. 
+// 
+// Usage: 
+// 	.box {
+//		@include numberOfChildren(box, 2 4)	{
+//			width: 50%;
+//		}	
+//		@include numberOfChildren(box, 3 5 6) {
+//			width: 33.3333%;
+//		}
+//	}
+// ---------------------------------------------
+
+@mixin numberOfChildren($elemClass, $numbers) {
+	@each $number in $numbers {
+		&:first-child:nth-last-child(#{$number}),
+		&:first-child:nth-last-child(#{$number}) ~ .#{$elemClass} {
+			@content;			
+		}
+	}
+}
