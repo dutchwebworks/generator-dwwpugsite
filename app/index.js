@@ -1,12 +1,65 @@
 'use strict';
 
-var generators = require('yeoman-generator'),
+var Generator = require('yeoman-generator'),
 	mkdirp = require('mkdirp'),
 	yosay = require('yosay'),
 	chalk = require('chalk');
 
-module.exports = generators.Base.extend({
-	_createProjectFileSystem: function() {
+module.exports = class extends Generator {
+	constructor(args, opts) {
+		// Calling the super constructor is important so our generator is correctly set up
+		super(args, opts);
+
+		// Next, add your custom code
+		this.option('babel'); // This method adds support for a `--babel` flag
+	}
+
+	initializing() {
+		var message = chalk.yellow.bold('Welcome to the Dutchwebworks ') + chalk.yellow('Pugsite generator');
+		this.log(yosay(message, { maxLength: 15 }));
+	}
+
+	prompting() {
+		return this.prompt([{
+			type    : 'input',
+			name    : 'name',
+			message	: 'What is the name of this project?',
+			default : this.appname
+		}, {
+			type    : 'input',
+			name	: 'description',
+			message	: 'What is the project description?',
+			default : this.appname
+		}, {
+			type    : 'input',
+			name	: 'yourname',
+			message	: 'What is your name?',
+		}, {
+			type    : 'input',
+			name	: 'version',
+			message	: 'What is the version of your app?',
+			default	: '0.1.0'
+		}, {
+			type    : 'list',
+			name	: 'buildtool',
+			message	: 'Which buildtool would you like to use?',
+			choices	: ['Grunt', 'Gulp'],
+			default: 0
+		}]).then((answers) => {
+			this.buildtool = answers.buildtool;
+			this.appname = answers.name;
+			this.appdescription = answers.description;
+			this.appauthor = answers.yourname;
+			this.youremail = answers.youremail;
+			this.appversion = answers.version;
+		});
+	}
+
+	configuring() {
+		this.config.save();
+	}
+
+	writing() {
 		var destRoot = this.destinationRoot(),
 			sourceRoot = this.sourceRoot(),
 			templateContext = {
@@ -39,84 +92,20 @@ module.exports = generators.Base.extend({
 
 		this.fs.copyTpl(sourceRoot + '/README.md', destRoot + '/README.md', templateContext);
 		this.fs.copyTpl(sourceRoot + '/src/index.pug', destRoot + '/src/index.pug', templateContext);
-		this.fs.copyTpl(sourceRoot + '/src/includes/config.pug', destRoot + '/src/includes/config.pug', templateContext);
-	},
-	_getPrompt: function() {
-		var prompts = [
-				{
-					type: 'input',
-					name: 'name',
-					message: 'What is the name of this project?',
-					default: this.appname
-				},
-				{
-					type: 'input',
-					name: 'description',
-					message: 'What is the project description?',
-				},
-				{
-					type: 'input',
-					name: 'yourname',
-					message: 'What is your name?',
-				},
-				{
-					type: 'input',
-					name: 'youremail',
-					message: 'What is your e-mail address?',
-				},
-				{
-					type: 'input',
-					name: 'version',
-					message: 'What is the version of your app?',
-					default: '1.0.0'
-				},
-				{
-					type: 'list',
-					name: 'buildtool',
-					message: 'Which buildtool would you like to use?',
-					choices: ['Grunt', 'Gulp'],
-					default: 0
-				}
-			];
+		this.fs.copyTpl(sourceRoot + '/src/helpers/config.pug', destRoot + '/src/helpers/config.pug', templateContext);
+	}
 
-			return prompts;
-	},
-	_saveAnswers: function(answers, callback) {
-		this.buildtool = answers.buildtool;
-		this.appname = answers.name;
-		this.appdescription = answers.description;
-		this.appauthor = answers.yourname;
-		this.youremail = answers.youremail;
-		this.appversion = answers.version;
-		callback();
-	},
-	initializing: function() {
-		var message = chalk.yellow.bold('Welcome to the Dutchwebworks ') + chalk.yellow('Pugsite generator');
-		this.log(yosay(message, { maxLength: 15 }));
-	},
-	promting: function() {
-		var done = this.async();
-
-		this.prompt(this._getPrompt(), function(answers){	
-			this._saveAnswers(answers, done);
-		}.bind(this));
-	},
-	configuring: function() {
-		this.config.save();
-	},
-	writing: function() {
-		this._createProjectFileSystem();
-	},
-	install: function() {
+	install() {
 		var message = chalk.yellow.bold('Running NPM install, hold on ...');
 		this.log(yosay(message, { maxLength: 20 }));
 		this.npmInstall();
-	},
-	end: function() {
+	}
+
+	end() {
 		if(this.buildtool == 'Grunt') {	
 			this.spawnCommand('grunt', ['serve']);
 		} else {
 			this.spawnCommand('gulp', ['serve']);
 		}
 	}
-});
+};
