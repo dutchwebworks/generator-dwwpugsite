@@ -6,14 +6,6 @@ var Generator = require('yeoman-generator'),
 	chalk = require('chalk');
 
 module.exports = class extends Generator {
-	constructor(args, opts) {
-		// Calling the super constructor is important so our generator is correctly set up
-		super(args, opts);
-
-		// Next, add your custom code
-		this.option('babel'); // This method adds support for a `--babel` flag
-	}
-
 	initializing() {
 		var message = chalk.yellow.bold('Welcome to the Dutchwebworks ') + chalk.yellow('Pugsite generator');
 		this.log(yosay(message, { maxLength: 15 }));
