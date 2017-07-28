@@ -1,0 +1,8 @@
+footer {
+	hr {
+		height: 0;
+		overflow: hidden;
+		border: 0;
+		border-top: 1px solid map-get($colors, 01);
+	}
+}
