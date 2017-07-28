@@ -1,5 +1,42 @@
-body {
-	margin: 0;
-	padding: 0;
-	font-family: Verdana, sans-serif;
-}
+// Main style Sass manifest
+
+// ---------------------------------------------
+// Helpers
+// ---------------------------------------------
+
+@import
+	"helpers/config",
+	"helpers/flexbox",
+	"helpers/grid",
+	"helpers/mixins";
+
+// ---------------------------------------------
+// Base
+// ---------------------------------------------
+
+@import
+	"base/elements";
+
+// ---------------------------------------------
+// Layout
+// ---------------------------------------------
+
+@import
+	// "layout/bootstrap-to-css-grid",
+	"layout/wrapper";
+
+// ---------------------------------------------
+// Modules
+// ---------------------------------------------
+
+@import
+	"modules/footer",
+	"modules/media";
+
+// ---------------------------------------------
+// @font-face loaded last, for non-blocking 
+// resources and better perceived performance
+// ---------------------------------------------
+
+@import
+	"base/font-face";

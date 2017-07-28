@@ -125,7 +125,7 @@ gulp.task('build', ['clean'], function(){
 gulp.task('serve', ['build', 'browser-sync'], function(){
 	gulp.watch(dist + '/*.html').on('change', browserSync.reload);
 	gulp.watch(config.cssPath + '/*.css').on('change', browserSync.reload);
-	gulp.watch(src + '/*.pug', ['pug']).on('change', browserSync.reload);
+	gulp.watch(src + '/**/*.pug', ['pug']).on('change', browserSync.reload);
 	gulp.watch(config.scssPath + '/**/*.scss', ['sass']).on('change', browserSync.reload);
 });
 
