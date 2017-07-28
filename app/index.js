@@ -60,7 +60,8 @@ module.exports = class extends Generator {
 				appdescription: this.appdescription,
 				appauthor: this.appauthor,
 				youremail: this.youremail,
-				appversion: this.appversion				
+				appversion: this.appversion,
+				appYear: new Date().getFullYear()
 			};
 
 		// ---------------------------
@@ -79,9 +80,10 @@ module.exports = class extends Generator {
 		}
 
 		// ---------------------------
-		// Copy over (template) files
+		// Copy over (template) files with placeholder filled answers
 		// ---------------------------
 
+		this.fs.copyTpl(sourceRoot + '/LICENSE', destRoot + '/LICENSE', templateContext);
 		this.fs.copyTpl(sourceRoot + '/README.md', destRoot + '/README.md', templateContext);
 		this.fs.copyTpl(sourceRoot + '/src/index.pug', destRoot + '/src/index.pug', templateContext);
 		this.fs.copyTpl(sourceRoot + '/src/helpers/config.pug', destRoot + '/src/helpers/config.pug', templateContext);
