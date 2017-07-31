@@ -1,7 +1,9 @@
 .media {
-	
+	border: 1px solid map-get($colors, 01);;
+	padding: 20px;
+	border-radius: 8px;
 }
 
 .media__title {
-	
+	margin-top: 0;
 }
