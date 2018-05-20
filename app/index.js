@@ -28,6 +28,10 @@ module.exports = class extends Generator {
 			message	: 'What is your name?',
 		}, {
 			type    : 'input',
+			name	: 'youremail',
+			message	: 'What is your e-mail?',
+		}, {
+			type    : 'input',
 			name	: 'version',
 			message	: 'What is the version of your app?',
 			default	: '0.1.0'
@@ -61,7 +65,7 @@ module.exports = class extends Generator {
 				appauthor: this.appauthor,
 				youremail: this.youremail,
 				appversion: this.appversion,
-				appYear: new Date().getFullYear()
+				appyear: new Date().getFullYear()
 			};
 
 		// ---------------------------

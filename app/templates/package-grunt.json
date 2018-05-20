@@ -5,15 +5,15 @@
   "version": "<%= appversion %>",
   "main": "Gruntfile.js",
   "devDependencies": {
-    "grunt": "^1.0.1",
+    "grunt": "^1.0.2",
     "grunt-browser-sync": "^2.2.0",
     "grunt-contrib-clean": "^1.1.0",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-pug": "^1.0.0",
-    "grunt-contrib-watch": "^1.0.0",
-    "grunt-sass": "^2.0.0",
-    "jstransformer-escape-html": "^1.0.0",
-    "jstransformer-markdown-it": "^2.0.0",
-    "load-grunt-tasks": "^3.5.2"
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-sass": "^2.1.0",
+    "jstransformer-escape-html": "^1.1.0",
+    "jstransformer-markdown-it": "^2.1.0",
+    "load-grunt-tasks": "^4.0.0"
   }
 }
