@@ -1,6 +1,6 @@
 # <%= appname %> static site generator with Pug
 
-*By <%= appauthor %>, <%= appYear %>*
+*By <%= appauthor %>, <%= appyear %>*
 
 Source files are compiled (and copied) from the `src/` directory to the `dist/`. The `dist/` directory is empty by default and removed every time Grunt or Gulp launches to re-create / re-compile the source material to the destination `dist/` directory.
 
